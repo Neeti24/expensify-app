@@ -828,6 +828,8 @@ $ - make sure the regular expression end what we have here
                    -git add file_name/folder_name - 
                    -git add . - this will add all of the file we had
                    -git commit -m "initial commit" - when we commit we have to provide a human readable massage.
+                    - git config --global user.email "you@example.com"
+                     - git config --global user.name "Your Name"
 
         *working tree clean means that everything is added and is the same as last commmit
 
@@ -852,7 +854,7 @@ $ - make sure the regular expression end what we have here
     *for window you have to use git blash the commands we use to check SSH key and create new one are not going to avaiable on regular window command line.So, switch over to git blash 
     *if your are mac/os/linux we can continue to use regular command line 
 
-            => ls -a ~/.ssh : it check for existing key
+            => ls -al ~/.ssh : it check for existing key
         
         -> ls : list out in a specific folder
         -> -a : make sure it show the all hidden file as well
