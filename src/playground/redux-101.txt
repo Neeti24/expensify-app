@@ -1,0 +1,180 @@
+*******************Redux*******************
+
+        *issue we ruuning into compoennt state in complex application then we explore how Redux can 
+            solve those issue allowing us to build complex and real world application.
+
+        *See the Redux world file.
+
+        *learn more from - redux.js.org 
+        *install redux
+    
+    ->yarn add redux@4.0.5
+
+        *import the liabary called "createStore" which is called once to create the store.
+
+    ->import { createStore } from 'redux';
+
+        *Next create the store called 'store'.
+        *you can't call it without any argument it does expect a function be the first argument. 
+        *and the first argument of the 'createStore' is 'state' and this is going to be current state.
+        *default value : if there is no current state the default value should shown up
+        *getState() - this method return the current state object.
+
+    
+    ->const store = createStore((state = { count : 0 }) => {
+                            return state;
+                    });
+            console.log(store.getState());
+
+        * createStore is similar to setState.
+    
+    ->this.setState = ((prevstate) => {
+                    return prevState
+                })
+
+*******************Dispatching Action*******************
+
+        *Dispatches an action. This is the only way to trigger a state change.
+            *Dispatch : it allow us to send of an action object and the createStore an do something with this information.
+            *action : it is nothing more than object that gets send to the 'store' and this action describe the 'type' of action
+                    we like to take and if we have another value of type it will be seperated by underscore(_)
+                    like : type = 'INCREMNET_OTHER'.Let's see the action object :
+
+                -increment the count 
+    ->store.dispatch(
+        {
+        type : 'INCREMENT'
+        }
+      );
+
+                -decrement the count 
+    ->store.dispatch(
+        {
+        type : 'DECREMENT'
+        }
+      );
+
+                  -reset the count 
+    ->store.dispatch(
+        {
+        type : 'RESET'
+        }
+      );
+
+    ->console.log(store.getState());
+
+        *next set the 'action' as a 2nd argument of store.
+        *we can use the if-else statment to scale the action type but as we have more type is best to use switch statement.
+
+    ->const store = createStore((state = { count: 0 }, action) => {
+                    switch (action.type) {
+                        case 'INCREMENT' :
+                            return {
+                                count : state.count + 1
+                            };
+                            case 'CECREMENT':
+                                return {
+                                    count : state.count - 1
+                                }
+                            case 'RESET' :
+                                return {
+                                    count : 0
+                                }
+                            default :
+                            return state;
+                        }
+                    });
+
+*******************subscribe and Dynamic Action*******************
+
+        *subscribe : its a function and gets call with a single function into it and this get call every single time the store changes.
+
+    ->store.subscribe(() => {
+                    console.log(store.getState());
+                }) 
+
+        *not only we can subscribe to the store we can also remove indivisual subscribe
+        *and called it after 1st increment dispatch unsubscribe(); 
+        *behind the scenes state will change we just not being notify because of the unsubscribe call.
+
+    ->const unsubscribe = store.subscribe(() => {
+                    console.log(store.getState());
+                }) 
+
+        
+        *how to provide some extra information in action and make it dynamicly
+        *and set ternary operator in switch because we provide extra information in only one incrementBy.
+    
+    ->store.dispatch(
+                {
+                    type: 'INCREMENT',
+                    incrementBy : 5
+                }
+            );
+
+
+*******************Refactoring and Organizing*******************
+
+        *action generators = function that return action objects
+        *spelling mistake/mistype error not given by manually generators action object:
+                *If I mistype type="INCREMENTT"
+                *it will not going to work but also it will not shpw any error
+                *tha's why we are ging to use action generators which throw error if we mistype.
+
+        *we are going to create 4 seperate action generators where each one take care of generating different action object cases :
+                *generating action objects for all increment cases
+                *generating action objects for all decrement cases
+                *generating action objects for all reset cases
+                *generating action objects for all set cases
+        
+        *How we are going to do that :
+                *1st create a arrow function 
+        ->const incrementCount = () => ({
+                            type : 'INCREMENT'
+                        })
+
+                *call action generator function inside dispatch:
+        ->store.dispatch(incrementCount());
+
+        *at this point of time we hav no way to handle "incrementBy".But we aBut we are going to actually pass it.
+                
+                *on here we are going provide all the customer data we nee in our case is only one 
+                                                ^
+                                                |
+        ->store.dispatch(incrementCount({incrementBy : 5}));
+                                        ^
+                                        |
+                *we are going to pass in first and only argument to the increment count action generator on object 
+
+        *if i try to run this program now we not going have increment and error becasue there is not handle for the argument passed in.
+         Action generator no code for that.
+        *Code for argument :
+        ->Example : 
+                *we are destructuring the 1st argument that passed into add and the argument is object 
+                and we can pull the argument from that object 
+                                |
+                const add = ({ a, b}, c) => {
+                    return a + b + c;
+                }
+                console.log(add({ a:2, b:14}, 100))
+                                        |       |
+                                {1st argument}, 2nd argument
+
+                ->In our action generator :
+                           *impty object: if we remove that it wil throw an error because incrementBy willbe undefine.If I had situation when i didn't provide 
+                            incrementby to incrementCount.
+                                                            ^
+                                                            |
+                const incrementCount = ({incrementBy = 1} = {}) => ({
+                    type : 'INCREMENT,
+                    incrementBy
+                });
+
+                ->store.dispatch(incrementCount({incrementBy : 5}));
+
+                *( {incrementBy = 1} = {}  ) this is same effect as this one ( typeof action.incrementBy === 'number' ? action.incrementBy : 1; )
+                   
+
+
+          
+
