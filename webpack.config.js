@@ -6,7 +6,7 @@ module.exports = (env, argv) => {
 // const isProduction = env === 'production';
 const CSSExtract = new MiniCssExtractPlugin({ filename : 'styles.css' });
   return {
-    mode : env.production ? 'production' : 'develpoment',
+    mode : env.production ? 'production' : 'development',
     entry: './src/app.js',
     output: {
       path: path.join(__dirname, 'public'),
