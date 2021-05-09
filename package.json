@@ -1,6 +1,9 @@
 {
     "name": "expensify-app",
     "version": "1.0.0",
+    "engines": { 
+        "node": "^16.1.0" 
+    },
     "main": "index.js",
     "author": "Neeti",
     "license": "MIT",
@@ -31,7 +34,6 @@
         "live-server": "^1.2.0",
         "mini-css-extract-plugin": "^1.6.0",
         "moment": "2.18.1",
-        "node": "^16.1.0",
         "node-sass": "^5.0.0",
         "normalize.css": "7.0.0",
         "raf": "3.3.2",
