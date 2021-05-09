@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
+    "node" : "15.6.0",
     "yarn" : "1.22.10"
   },
   "repository": "git@github.com:Neeti24/expensify-app.git",
