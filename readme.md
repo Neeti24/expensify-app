@@ -7,5 +7,9 @@
 
 
 
+Remove the package-lock.json : git rm package-lock.json  
+To push exiting project  : heroku git:remote -a my-daily-expenses 
+final : git push heroku master:master
+heroku open
 
-
+this command add modified files not new files : git commit -am "comment here"

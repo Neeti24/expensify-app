@@ -1,15 +1,16 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = (env, argv) => {
-// const isProduction = env === 'production';
-const CSSExtract = new MiniCssExtractPlugin({ filename : 'styles.css' });
+  // const isProduction = env === 'production';
+  const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
   return {
-    mode : env.production ? 'production' : 'development',
+    mode: env.production ? 'production' : 'development',
     entry: './src/app.js',
     output: {
-      path: path.join(__dirname, 'public'),
+      path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
     module: {
@@ -21,35 +22,42 @@ const CSSExtract = new MiniCssExtractPlugin({ filename : 'styles.css' });
         test: /\.s?css$/,
         use: [
           {
-            loader : MiniCssExtractPlugin.loader
-           },
-           {
-             loader : 'css-loader',
-             options : {
-               sourceMap : true
-             }
-           },
-           {
-             loader : 'sass-loader',
-             options : {
-               sourceMap : true
-             }
-           }
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
         ]
       }]
     },
-    plugins : [
+    plugins: [
       CSSExtract,
       new TerserPlugin({
         terserOptions: {
-         compress: argv.mode === 'production' // only if `--mode production` was passed
+          compress: argv.mode === 'production' // only if `--mode production` was passed
         }
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
       })
     ],
     devtool: env.production ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
-      historyApiFallback : true
+      historyApiFallback: true,
+      publicPath: '/dist/'
+    },
+    stats : {
+      errorDetails: true
     }
   };
 };
