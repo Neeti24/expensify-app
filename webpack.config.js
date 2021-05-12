@@ -45,9 +45,6 @@ module.exports = (env, argv) => {
         terserOptions: {
           compress: argv.mode === 'production' // only if `--mode production` was passed
         }
-      }),
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production')
       })
     ],
     devtool: env.production ? 'source-map' : 'inline-source-map',
