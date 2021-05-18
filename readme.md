@@ -13,3 +13,6 @@ final : git push heroku master:master
 heroku open
 
 this command add modified files not new files : git commit -am "comment here"
+
+
+yarn install --production
