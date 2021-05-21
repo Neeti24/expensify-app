@@ -16,3 +16,9 @@ this command add modified files not new files : git commit -am "comment here"
 
 
 yarn install --production
+
+
+
+-heroku config - it print out all of your environment variable
+		-heroku config:set KEY=value - it set up the env variable
+		-heroku config:unset - remove the env variable	
