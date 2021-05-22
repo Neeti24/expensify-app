@@ -14,7 +14,9 @@
     "heroku-postbuild": "yarn run build:prod"
   },
   "engines": {
-    "node" : "15.x"
+    "node" : "15.x",
+    "npm" : "1.x",
+    "yarn" : "7.x"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
