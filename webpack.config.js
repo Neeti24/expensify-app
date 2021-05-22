@@ -2,12 +2,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV = 'test' || 'development';
 
 if (process.env.NODE_ENV === 'test') {
-  require('dotenv').config({ path: '.env.test' });
+  require('dotenv').config({ path:'.env.test' });
 } else {
-  require('dotenv').config({ path: '.env.development' });
+  require('dotenv').config({ path:'.env.development' });
 }
 
 module.exports = (env) => {
