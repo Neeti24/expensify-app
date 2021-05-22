@@ -14,7 +14,7 @@
     "heroku-postbuild": "yarn run build:prod"
   },
   "engines": {
-    "node": "14.15.2",
+    "node": "15.6.0",
     "yarn": "1.22.10"
   },
   "dependencies": {
@@ -31,7 +31,6 @@
     "firebase": "^8.6.2",
     "mini-css-extract-plugin": "^1.6.0",
     "moment": "2.18.1",
-    "node": "14.15.2",
     "node-sass": "5.0.0",
     "normalize.css": "7.0.0",
     "numeral": "2.0.6",
