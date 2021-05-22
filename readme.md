@@ -22,3 +22,6 @@ yarn install --production
 -heroku config - it print out all of your environment variable
 		-heroku config:set KEY=value - it set up the env variable
 		-heroku config:unset - remove the env variable	
+
+
+-npm install --legacy-peer-deps
