@@ -1,7 +1,7 @@
 import { render } from 'enzyme/build';
 import React from 'react';
 import { connect } from 'react-redux';
-import { editExpense, removeExpense } from '../actions/expenses';
+import { editExpense, startRremoveExpense } from '../actions/expenses';
 import ExpenseForm from './ExpenseForm';
 
 export class EditExpensePage extends React.Component {
@@ -10,7 +10,7 @@ export class EditExpensePage extends React.Component {
         this.props.history.push('/');
     };
     onRemove = () => {
-        this.props.removeExpense( { id : this.props.expense.id });
+        this.props.startRremoveExpense( { id : this.props.expense.id });
         this.props.history.push('/');
     };
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     editExpense: (id, expense) => dispatch(editExpense(id, expense)),
-    removeExpense: (data) => dispatch(removeExpense(data))
+    startRremoveExpense: (data) => dispatch(startRremoveExpense(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);
