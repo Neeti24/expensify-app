@@ -3,7 +3,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
-process.env.NODE_ENV = 'test' || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development' || 'test';
 
 if (process.env.NODE_ENV === 'test') {
   require('dotenv').config({ path:'.env.test' });
@@ -12,10 +12,11 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 module.exports = (env) => {
+  console.log('hellllll', env, process.env.NODE_ENV);
   const isProduction = env === 'production';
   const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
   return {
-    mode: isProduction ? 'production' : 'development',
+    // mode: isProduction ? 'production' : 'development',
     entry: './src/app.js',
     output: {
       path: path.join(__dirname, 'public', 'dist'),
@@ -49,13 +50,13 @@ module.exports = (env) => {
     },
     plugins: [
       CSSExtract,
-      new TerserPlugin({
-        terserOptions: {
-          compress: isProduction === 'production' // only if `--mode production` was passed
-        },
-      }),
+      // new TerserPlugin({
+      //   terserOptions: {
+      //     compress: isProduction === 'production' // only if `--mode production` was passed
+      //   },
+      // }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('production' || 'development'),
+        // 'process.env.NODE_ENV': JSON.stringify('production' || 'development'),
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
         'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
@@ -66,7 +67,7 @@ module.exports = (env) => {
         'process.env.FIREBASE_MEASUREMENT_ID': JSON.stringify(process.env.FIREBASE_MEASUREMENT_ID)
       })
     ],
-    devtool: process.env.NODE_ENV ? 'source-map' : 'inline-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,

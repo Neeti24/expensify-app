@@ -25,3 +25,16 @@ yarn install --production
 
 
 -npm install --legacy-peer-deps
+-npm i -g npm@5.10.0 
+-npm root -g
+-C:\Users\Neeti\AppData\Roaming\npm\node_modules
+-yarn add history@4.7.2
+
+=> user.uid - we need to store the id in redux so we can use this value throwout the application to figure out id someone login if so who .
+    for this we need to create new auth reduser file and add some action in action's auth file.
+
+=>PrivateRoute - this will help us to create private routes menas without login we can't able to access the appliation we can do this by modifing the AppRouter's <Router>
+
+=>...Rest - when we creating object we can spread out the operater and it's properties (ex - ...props)
+        and when we create destructure the object we use reast operator(...rest) which contain all of staff that we didn't destructured and rest it just name we can change it.
+
