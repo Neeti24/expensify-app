@@ -38,3 +38,13 @@ yarn install --production
 =>...Rest - when we creating object we can spread out the operater and it's properties (ex - ...props)
         and when we create destructure the object we use reast operator(...rest) which contain all of staff that we didn't destructured and rest it just name we can change it.
 
+=>firebase db is still read and write by anybody so in order to achually that feature usefull we have to lock down the data.
+    there are some rules :
+        lean more : docs - guids - realtimeguide feature - security user data
+        and we do it in firebase a/c
+=>client side validation - give user readable , usefull response quickly
+=>serverside validation - make sure nothingsor not valid get save
+
+=>define the rules in the firebase's rule section 
+    and enable the authorized Domain in Authentication section
+lean more : docs - guids -reference - security -db rules
