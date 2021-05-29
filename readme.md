@@ -48,3 +48,17 @@ yarn install --production
 =>define the rules in the firebase's rule section 
     and enable the authorized Domain in Authentication section
 lean more : docs - guids -reference - security -db rules
+
+
+
+-->remenber partial file need to start with uder-score but the underscore and the extention are excluded when we are importing 
+
+
+=> Babel polyfill - allow your application to run in a wide range of browser and browser version.
+    yarn add babel-polyfill@6.26.0
+=> browser stacking - is a tool to simulate the app in the other browser 
+
+
+
+
+

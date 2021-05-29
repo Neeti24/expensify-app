@@ -3,21 +3,22 @@ const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development' || 'test';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (process.env.NODE_ENV === 'test') {
   require('dotenv').config({ path:'.env.test' });
-} else {
+} else if (process.env.NODE_ENV === 'development') {
   require('dotenv').config({ path:'.env.development' });
 }
 
-module.exports = (env, argu) => {
-  console.log(`mode is ${argu.mode}`);
+module.exports = (env) => {
+  console.log(`mode is ${env}`);
+  const isProduction = env === 'production';
   const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
   return {
-    mode: env.production ? 'production' : 'development',
-    devtool: env.production ? 'source-map' : 'inline-source-map',
-    entry: './src/app.js',
+    // mode: env.production ? 'production' : 'development',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    entry: ['babel-polyfill', './src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
@@ -50,12 +51,13 @@ module.exports = (env, argu) => {
     },
     plugins: [
       CSSExtract,
-      new TerserPlugin({
-        terserOptions: {
-          compress: argu.mode === 'production' // only if `--mode production` was passed
-        },
-      }),
+      // new TerserPlugin({
+      //   terserOptions: {
+      //     compress: argu.mode === 'production' // only if `--mode production` was passed
+      //   },
+      // }),
       new webpack.DefinePlugin({
+        // 'process.env.NODE_ENV': JSON.stringify('production' || 'development'),
         'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
         'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
         'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
