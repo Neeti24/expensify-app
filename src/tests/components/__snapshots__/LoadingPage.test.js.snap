@@ -6,7 +6,7 @@ exports[`should correctly render loadingPage 1`] = `
 >
   <img
     className="loader__image"
-    src="/public/images/loader.gif"
+    src="/images/loader.gif"
   />
 </div>
 `;
